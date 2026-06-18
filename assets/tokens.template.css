@@ -1,0 +1,99 @@
+/* ============================================================================
+   zobe.ai — design token scaffold
+   Copy this, fill the 3 EDIT-ME values, delete what you don't need.
+   Works as plain CSS variables AND as a Tailwind 4 @theme block (see bottom).
+   Principle: semantic names, fluid clamp() scales, ONE accent, off-white/off-black,
+   ONE radius identity, 1-2 easing tokens. Never hardcode raw values in components.
+   Tip: `python3 scripts/gen_tokens.py --accent "#0071e3" --mode light` generates a
+   filled version of this file (with WCAG-checked accent variants) for you.
+============================================================================ */
+
+:root {
+  /* ---- COLOR ---------------------------------------------------------------
+     EDIT-ME: pick mode + ONE accent. Ink is near-black, not #000.
+     Light surfaces are warm/cool off-white, not #fff. (see references/color.md) */
+  --accent:          #0071e3;  /* EDIT-ME: the one signature accent            */
+  --accent-strong:   #0060c0;  /* darker, WCAG-safe for text/buttons on light  */
+  --accent-tint:     #e7f1fd;  /* very light wash for backgrounds/hovers       */
+  --accent-on-dark:  #2997ff;  /* brightened accent for dark surfaces          */
+
+  --bg:        #f5f5f7;        /* page background (warm/cool off-white)         */
+  --surface:   #ffffff;        /* raised surface / card                        */
+  --ink:       #1d1d1f;        /* primary text (near-black, NOT #000)          */
+  --ink-muted: #6e6e73;        /* secondary text (~55-65% toward bg)           */
+  --border:    rgb(29 29 31 / 0.10); /* tonal hairline = alpha of ink          */
+
+  /* Optional status colors (product UI) — keep low-opacity so they don't break
+     the palette. (pattern: bg at 10-15% alpha, text at full) */
+  --ok:    #16a34a;  --ok-bg:   rgb(22 163 74 / 0.12);
+  --warn:  #d97706;  --warn-bg: rgb(217 119 6 / 0.12);
+  --error: #dc2626;  --error-bg:rgb(220 38 38 / 0.12);
+
+  /* ---- TYPE ----------------------------------------------------------------
+     EDIT-ME: a characterful display face + a quiet body workhorse.
+     NEVER Inter/system-ui as the brand voice. (see references/typography.md) */
+  --font-display: "Clash Display", "Space Grotesk", system-ui, sans-serif; /* EDIT-ME */
+  --font-body:    Inter, system-ui, sans-serif;                            /* body only */
+
+  /* Fluid type scale — clamp(min, preferred, max). Display negative-tracked. */
+  --text-micro:   clamp(0.69rem, 0.66rem + 0.15vw, 0.75rem);
+  --text-sm:      clamp(0.8rem,  0.77rem + 0.2vw,  0.875rem);
+  --text-body:    clamp(1rem,    0.96rem + 0.2vw,  1.125rem);
+  --text-lead:    clamp(1.2rem,  1.1rem  + 0.5vw,  1.5rem);
+  --text-h3:      clamp(1.5rem,  1.3rem  + 1vw,    2rem);
+  --text-h2:      clamp(2rem,    1.6rem  + 2vw,    3rem);
+  --text-h1:      clamp(2.6rem,  2rem    + 3vw,    4.25rem);
+  --text-display: clamp(3.25rem, 2.2rem  + 5.5vw, 7.5rem);
+
+  --tracking-display: -0.03em;  /* tight on big type            */
+  --tracking-body:    -0.005em; /* near-zero on body            */
+  --tracking-label:   0.14em;   /* wide on UPPERCASE eyebrows   */
+  --leading-display:  1.02;
+  --leading-body:     1.45;
+
+  /* ---- SPACING (8px base, fluid where it matters) -------------------------- */
+  --space-1: 0.25rem; --space-2: 0.5rem;  --space-3: 0.75rem; --space-4: 1rem;
+  --space-6: 1.5rem;  --space-8: 2rem;    --space-12: 3rem;   --space-16: 4rem;
+  --section-y: clamp(3rem, 8vw, 7.5rem);  /* vertical section rhythm           */
+  --measure:   min(92vw, 46rem);          /* text column ≈ 60-80ch (~720px)    */
+  --band:      min(92vw, 80rem);          /* wide section band (~1280px)       */
+
+  /* ---- SHAPE ---------------------------------------------------------------
+     EDIT-ME: ONE identity. Sharp = set all to 0. Soft = a tight scale + pill. */
+  --radius:      0.625rem;  /* workhorse (10px). Editorial? set 0.               */
+  --radius-sm:   0.375rem;
+  --radius-pill: 9999px;    /* buttons / chips                                   */
+  --border-w:    1px;
+
+  /* ---- ELEVATION (default flat; ONE soft shadow if needed) ----------------- */
+  --shadow-soft: 0 8px 24px rgb(0 0 0 / 0.08);   /* large blur, low opacity     */
+  --shadow-none: none;
+
+  /* ---- MOTION (1-2 easing tokens, reuse everywhere) ------------------------ */
+  --ease:        cubic-bezier(0.4, 0, 0.2, 1);        /* workhorse              */
+  --ease-expo:   cubic-bezier(0.165, 0.84, 0.44, 1);  /* expressive reveal      */
+  --ease-spring: cubic-bezier(0.32, 0.72, 0, 1);      /* tactile press (product)*/
+  --dur-fast: 160ms;
+  --dur:      280ms;
+}
+
+/* Optional dark theme: brighten accent, swap ink/bg. */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #020202; --surface: #151515; --ink: #ffffff; --ink-muted: #a0a0a0;
+    --border: rgb(255 255 255 / 0.12); --accent: var(--accent-on-dark);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}
+
+/* ----------------------------------------------------------------------------
+   Tailwind 4 users: mirror the tokens into @theme so utilities pick them up.
+   @theme {
+     --color-bg: #f5f5f7;  --color-ink: #1d1d1f;  --color-accent: #0071e3;
+     --font-display: "Clash Display", sans-serif;
+     --radius-DEFAULT: 0.625rem;  --ease-DEFAULT: cubic-bezier(0.4,0,0.2,1);
+   }
+---------------------------------------------------------------------------- */

@@ -1,0 +1,23 @@
+# dependencies / build artifacts
+node_modules/
+dist/
+dist-server/
+
+# local tooling (not part of the skill or site)
+_shot.mjs
+*.local
+
+# python
+__pycache__/
+*.pyc
+
+# os / editor
+.DS_Store
+*.swp
+
+# secrets — never commit
+.env
+.env.*
+
+# typescript build cache
+*.tsbuildinfo
