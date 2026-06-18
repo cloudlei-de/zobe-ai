@@ -1,0 +1,16 @@
+# zobe.ai — anti-slop design engine (Windsurf rules)
+
+For any visual-design task (website, landing, hero, UI, component, brand, palette, design system)
+or de-slopping an AI-generated design, apply zobe.ai. Brand-agnostic — derive the look from the
+brief; produce design that looks decided by a human, free of generic LLM "slop".
+
+The 10 laws: 1) ONE accent on a near-monochrome base. 2) A characterful display face (Inter only as
+quiet body). 3) Two-pole type tension (display huge + tight; labels tiny + UPPERCASE + wide).
+4) Flat depth, separate by background/imagery, not card-shadow soup. 5) One shape language.
+6) 1–2 easing tokens, no bare `transition: all`. 7) Near-black ink, off-white surfaces. 8) Tokenize
+with fluid clamp() scales + semantic names. 9) Earn premium with specificity, not stock/filler.
+10) Narrow reading measure in wide bands; steep hierarchy; one idea per section.
+
+Procedure: frame → short intake → lock a direction → tokens first → build on tokens → self-audit
+against the red-flag checklist before delivering. Full guidance in AGENTS.md + references/; runnable
+helpers in scripts/ (run slop_audit.py on the output).
