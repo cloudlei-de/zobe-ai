@@ -21,3 +21,6 @@ __pycache__/
 
 # typescript build cache
 *.tsbuildinfo
+
+# website (not part of the public skill repo)
+site/
